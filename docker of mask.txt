@@ -1,0 +1,19 @@
+sudo docker run  -it --mount type=bind,source=/home,target=/srv  ubuntu:18.04
+apt update
+apt install git
+apt install python3
+apt install python3-pip
+pip3 install --upgrade pip
+pip3 install -r requirements_face.txt
+
+
+
+run with gui support
+sudo mknod /dev/video0 c 81 0
+xhost local:root
+
+
+
+sudo docker run -it  -e DISPLAY=$DISPLAY  -v /tmp/.X11-unix:/tmp/.X11-unix:rw --device=/dev/video0:/dev/video0 --mount type=bind,source=/home/dana/Documents/mask/,target=/srv --workdir="/srv" face
+
+python3 Main_Maskdetection_4frame.py
